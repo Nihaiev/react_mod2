@@ -26,7 +26,7 @@ class Dropdown extends Component {
           className="Dropdown__toggle"
           onClick={this.toggle}
         >
-          Toggle
+          {this.state.visible ? 'Приховати' : 'Показати'}
         </button>
 
         {/* <button type="button" className="Dropdown__toggle" onClick={this.hide}>
