@@ -1,5 +1,39 @@
 .TodoList{
+    width: 400px;
 
 }
 
-.TodoList__item {}
+.TodoList__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+.TodoList__text{
+    margin-right:5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.TodoList__button {
+    border: none;
+    padding: 10px 15px;
+    background-color: teal;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 1px 2px 2px 0 rgb(0 0 0 / 0.5);
+    transition: box-shadow 250ms linear;
+}
+
+.TodoList__button:active {
+    box-shadow: 2px 5px 2px 0 rgb(0 0 0 / 0.5);
+}
