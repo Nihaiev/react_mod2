@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Counter from './conponents/Counter';
 import Dropdown from './conponents/Dropdown';
 import ColorPicker from './conponents/ColorPicker';
+import Container from 'conponents/Container';
 import TodoList from 'conponents/TodoList';
 import initialTodos from './todos.json';
 
@@ -17,6 +18,8 @@ const colorPickerOptions = [
 class App extends Component {
   state = {
     todos: initialTodos,
+    name: '',
+    tag: '',
   };
 
   deleteTodo = todoId => {
@@ -24,6 +27,18 @@ class App extends Component {
       todos: prevState.todos.filter(todo => todo.id !== todoId),
     }));
   };
+
+  handleChange = e => {
+    const { name, value } = e.currentTarget;
+
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   render() {
     const { todos } = this.state;
     const totalTodoCount = todos.length;
@@ -32,19 +47,42 @@ class App extends Component {
       0
     );
     return (
-      <>
-        <h1>Стан компонента</h1>
-        <div>
+      <Container>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            SecondName
+            <input
+              type="text"
+              name="tag"
+              value={this.state.tag}
+              onChange={this.handleChange}
+            />
+          </label>
+          <button type="submit">Отправить</button>
+        </form>
+        {/* <h1>Стан компонента</h1> */}
+        {/* <div>
           <p>Загальна кількість ToDo: {totalTodoCount}</p>
           <p>Кількість виконаних ToDo: {completedTodoCount}</p>
         </div>
-        <TodoList todos={todos} onDeletTodo={this.deleteTodo} />
+        <TodoList todos={todos} onDeletTodo={this.deleteTodo} /> */}
         {/* <ColorPicker options={colorPickerOptions} /> */}
         {/* <Dropdown /> */}
         {/* <Counter initialValue={10} /> */}
-      </>
+      </Container>
     );
   }
 }
 
 export default App;
+
+//18
