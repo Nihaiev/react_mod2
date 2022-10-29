@@ -5,6 +5,7 @@ import ColorPicker from './conponents/ColorPicker';
 import Container from 'conponents/Container';
 import TodoList from 'conponents/TodoList';
 import initialTodos from './todos.json';
+import Form from './conponents/Form';
 
 const colorPickerOptions = [
   { label: 'red', color: '#f44336' },
@@ -18,8 +19,6 @@ const colorPickerOptions = [
 class App extends Component {
   state = {
     todos: initialTodos,
-    name: '',
-    tag: '',
   };
 
   deleteTodo = todoId => {
@@ -28,15 +27,23 @@ class App extends Component {
     }));
   };
 
-  handleChange = e => {
-    const { name, value } = e.currentTarget;
-
-    this.setState({ [name]: value });
+  toggleCompleted = todoId => {
+    console.log(todoId);
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo => {
+        if (todo.id === todoId) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      }),
+    }));
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log(this.state);
+  formSubmitHandler = data => {
+    console.log(data);
   };
 
   render() {
@@ -48,33 +55,14 @@ class App extends Component {
     );
     return (
       <Container>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            SecondName
-            <input
-              type="text"
-              name="tag"
-              value={this.state.tag}
-              onChange={this.handleChange}
-            />
-          </label>
-          <button type="submit">Отправить</button>
-        </form>
+        <TodoList todos={todos} onDeletTodo={this.deleteTodo} />
+        {/* <Form onSubmit={this.formSubmitHandler} /> */}
         {/* <h1>Стан компонента</h1> */}
         {/* <div>
           <p>Загальна кількість ToDo: {totalTodoCount}</p>
           <p>Кількість виконаних ToDo: {completedTodoCount}</p>
         </div>
-        <TodoList todos={todos} onDeletTodo={this.deleteTodo} /> */}
+        
         {/* <ColorPicker options={colorPickerOptions} /> */}
         {/* <Dropdown /> */}
         {/* <Counter initialValue={10} /> */}
